@@ -9,11 +9,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Sunpu client</Description>
-    <PackageReleaseNotes>Initial</PackageReleaseNotes>
+    <PackageReleaseNotes>Added IsMultiRoomSupported property</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/sunpu-client</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/sunpu-client</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
   </PropertyGroup>
