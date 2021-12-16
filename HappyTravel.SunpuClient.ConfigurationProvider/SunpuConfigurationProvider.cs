@@ -42,7 +42,7 @@ namespace HappyTravel.SunpuClient.ConfigurationProvider
                 dictionary.Add($"{SectionName}:{ListName}:{i}:{nameof(Supplier.Name)}", suppliers[i].Name);
                 dictionary.Add($"{SectionName}:{ListName}:{i}:{nameof(Supplier.IsEnabled)}", suppliers[i].IsEnabled.ToString());
                 dictionary.Add($"{SectionName}:{ListName}:{i}:{nameof(Supplier.ConnectorUrl)}", suppliers[i].ConnectorUrl);
-                dictionary.Add($"{SectionName}:{ListName}:{i}:{nameof(Supplier.IsMultiRoomSupported)}", suppliers[i].IsMultiRoomSupported.ToString());
+                dictionary.Add($"{SectionName}:{ListName}:{i}:{nameof(Supplier.IsMultiRoomFlowSupported)}", suppliers[i].IsMultiRoomFlowSupported.ToString());
             }
 
             return dictionary;
