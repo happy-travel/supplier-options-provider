@@ -9,12 +9,7 @@ namespace HappyTravel.SunpuClient.ConfigurationProvider
 {
     public class SunpuConfigurationProvider : Microsoft.Extensions.Configuration.ConfigurationProvider
     {
-        public SunpuConfigurationProvider(string endpoint, 
-            string identityUrl, 
-            string clientId, 
-            string clientSecret,
-            string clientScope
-            )
+        public SunpuConfigurationProvider(string endpoint, string identityUrl, string clientId, string clientSecret, string clientScope)
         {
             _endpoint = endpoint;
             _client = new HttpClient();
@@ -27,27 +22,32 @@ namespace HappyTravel.SunpuClient.ConfigurationProvider
     
         public override void Load()
         {
+            // Load data initially without catching any exception
+            // if something wrong with the configuration, it will fail here
+            LoadIdentityToken().GetAwaiter().GetResult();
+            Data = Generate(Fetch().GetAwaiter().GetResult());
+            OnReload();
+            
             _recurrentLoadTask.Start();
         }
 
         
         private async void LoadSuppliers()
         {
-            await LoadIdentityToken();
-            
             while (true)
             {
+                await Task.Delay(RecurrentLoadDelayInMilliseconds);
+
                 try
                 {
                     Data = Generate(await Fetch());
                     OnReload();
-                    await Task.Delay(RecurrentLoadDelayInMilliseconds);
                 }
                 catch (HttpRequestException exception) when (exception.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     await LoadIdentityToken();
                 }
-                catch { }
+                catch { }  // intentionally left blank to supress any errors
             }
         }
 
