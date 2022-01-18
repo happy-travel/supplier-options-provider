@@ -4,16 +4,16 @@
     <Nullable>enable</Nullable>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <Copyright>HappyTravel.com</Copyright>
-    <Authors>Denis Nikolaev</Authors>
+    <Authors>Denis Nikolaev, Konstantin Yefremov</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Sunpu client</Description>
-    <PackageReleaseNotes>Added IsMultiRoomFlowSupported property</PackageReleaseNotes>
+    <PackageReleaseNotes>Add token authorization and recurrent data reload</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/sunpu-client</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/sunpu-client</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
   </PropertyGroup>
