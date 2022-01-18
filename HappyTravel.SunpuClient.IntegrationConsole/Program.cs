@@ -3,7 +3,7 @@ using HappyTravel.SunpuClient.ConfigurationProvider;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// Testing SunpuClient as a configuration provider
+// Add all the required data here to test this configuration provider
 var config = new ConfigurationBuilder()
     .AddSuppliersConfiguration(
         "",
