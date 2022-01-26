@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HappyTravel.SunpuClient.ConfigurationProvider\HappyTravel.SunpuClient.ConfigurationProvider.csproj" />
+      <ProjectReference Include="..\HappyTravel.SunpuClient\HappyTravel.SunpuClient.csproj" />
     </ItemGroup>
 
 </Project>
