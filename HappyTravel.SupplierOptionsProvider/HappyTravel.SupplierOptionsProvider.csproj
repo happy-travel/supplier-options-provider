@@ -17,6 +17,7 @@
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
     <PackageVersion>0.1.0</PackageVersion>
+    <RootNamespace>HappyTravel.SunpuClient</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

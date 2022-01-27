@@ -1,0 +1,17 @@
+[
+    {
+        "id": 6001,
+        "name": "SuppliersStorageRefreshed",
+        "level": "Debug",
+        "template": "Suppliers storage was refreshed with {Count} suppliers",
+        "argumentTypes": [
+            "int"
+        ]
+    },
+    {
+        "Id": 6002,
+        "name": "SupplierStorageUpdateFailed",
+        "level": "Error",
+        "template": "Supplier storage update failed"
+    }
+]
