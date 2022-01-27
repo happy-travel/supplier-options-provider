@@ -1,4 +1,4 @@
-﻿namespace HappyTravel.SunpuClient
+﻿namespace HappyTravel.SupplierOptionsProvider
 {
     public class Supplier
     {

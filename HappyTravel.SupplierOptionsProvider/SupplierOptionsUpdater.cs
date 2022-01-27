@@ -4,17 +4,18 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using HappyTravel.SunpuClient.Logger;
+using HappyTravel.SupplierOptionsProvider.Logger;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace HappyTravel.SunpuClient
+namespace HappyTravel.SupplierOptionsProvider
 {
-    public class Updater : BackgroundService
+    internal class SupplierOptionsUpdater : BackgroundService
     {
-        public Updater(IHttpClientFactory httpClientFactory, IServiceScopeFactory scopeFactory, IOptions<Configuration> configuration, IStorage storage, ILogger<Updater> logger)
+        public SupplierOptionsUpdater(IHttpClientFactory httpClientFactory, IServiceScopeFactory scopeFactory, 
+            IOptions<Configuration> configuration, ISupplierOptionsStorage storage)
         {
             _httpClientFactory = httpClientFactory;
             _scopeFactory = scopeFactory;
@@ -28,7 +29,7 @@ namespace HappyTravel.SunpuClient
             while (!stoppingToken.IsCancellationRequested)
             {
                 using var scope = _scopeFactory.CreateScope();
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Updater>>();
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<SupplierOptionsUpdater>>();
                 
                 try
                 {
@@ -39,7 +40,7 @@ namespace HappyTravel.SunpuClient
                     logger.LogSupplierStorageUpdateFailed();
                 }
 
-                await Task.Delay(_configuration.UpdaterIntervalInSeconds, stoppingToken);
+                await Task.Delay(_configuration.UpdaterInterval, stoppingToken);
             }
         }
 
@@ -47,7 +48,7 @@ namespace HappyTravel.SunpuClient
         private async Task UpdateStorage(ILogger logger, CancellationToken cancellationToken)
         {
             var client = _httpClientFactory.CreateClient(_configuration.HttpClientName);
-            using var response = await client.GetAsync(_configuration.EndPoint, cancellationToken);
+            using var response = await client.GetAsync(_configuration.Endpoint, cancellationToken);
             
             response.EnsureSuccessStatusCode();
 
@@ -63,7 +64,7 @@ namespace HappyTravel.SunpuClient
 
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IServiceScopeFactory _scopeFactory;
+        private readonly ISupplierOptionsStorage _storage;
         private readonly Configuration _configuration;
-        private readonly IStorage _storage;
     }
 }

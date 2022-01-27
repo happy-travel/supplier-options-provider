@@ -1,15 +1,15 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace HappyTravel.SunpuClient
+namespace HappyTravel.SupplierOptionsProvider
 {
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddSupplierOptionsProvider(this IServiceCollection services, Action<Configuration> configuration)
         {
             services.Configure(configuration);
-            services.AddHostedService<Updater>();
-            services.AddSingleton<Storage>();
+            services.AddHostedService<SupplierOptionsUpdater>();
+            services.AddSingleton<ISupplierOptionsStorage, SupplierOptionsStorage>();
             return services;
         }
     }

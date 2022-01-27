@@ -1,22 +1,32 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Microsoft.Extensions.Options;
 
-namespace HappyTravel.SunpuClient
+namespace HappyTravel.SupplierOptionsProvider
 {
-    public class Storage : IStorage
+    public class SupplierOptionsStorage : ISupplierOptionsStorage
     {
-        public Storage(IOptions<Configuration> configuration)
+        public SupplierOptionsStorage(IOptions<Configuration> configuration)
         {
             _configuration = configuration.Value;
         }
         
         
-        public List<Supplier> Get()
+        public List<Supplier> All()
         {
-            if (SpinWait.SpinUntil(() => _isFilled, TimeSpan.FromSeconds(_configuration.StorageTimeoutInSeconds)))
+            if (SpinWait.SpinUntil(() => _isFilled, _configuration.StorageTimeout))
                 return _suppliers;
+
+            throw new Exception("Supplier storage is not filled");
+        }
+
+
+        public Supplier GetById(int id)
+        {
+            if (SpinWait.SpinUntil(() => _isFilled, _configuration.StorageTimeout))
+                return _suppliers.Single(s => s.Id == id);
 
             throw new Exception("Supplier storage is not filled");
         }
