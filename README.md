@@ -1,5 +1,5 @@
 # Sunpu client
-Provides easier way to add suppliers configuration to project.
+Provides easier way to add suppliers configuration to project
 
 
 ## Usage
