@@ -14,7 +14,7 @@ namespace HappyTravel.SupplierOptionsProvider
         }
         
         
-        public List<Supplier> All()
+        public List<Supplier> GetAll()
         {
             if (SpinWait.SpinUntil(() => _isFilled, _configuration.StorageTimeout))
                 return _suppliers;
@@ -30,8 +30,8 @@ namespace HappyTravel.SupplierOptionsProvider
 
             throw new Exception("Supplier storage is not filled");
         }
-        
 
+        
         public void Set(List<Supplier> suppliers)
         {
             _suppliers = suppliers;

@@ -4,7 +4,7 @@ namespace HappyTravel.SupplierOptionsProvider
 {
     public interface ISupplierOptionsStorage
     {
-        List<Supplier> All();
+        List<Supplier> GetAll();
         Supplier GetById(int id);
         void Set(List<Supplier> suppliers);
     }

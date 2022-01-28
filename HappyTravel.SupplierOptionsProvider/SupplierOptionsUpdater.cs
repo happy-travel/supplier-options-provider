@@ -56,7 +56,10 @@ namespace HappyTravel.SupplierOptionsProvider
             var suppliers = await JsonSerializer.DeserializeAsync<List<Supplier>>(stream, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            }, cancellationToken) ?? new List<Supplier>();
+            }, cancellationToken);
+
+            if (suppliers is null)
+                throw new JsonException("Supplier list is not deserialized properly");
             
             _storage.Set(suppliers);
             logger.LogSuppliersStorageRefreshed(suppliers.Count);
