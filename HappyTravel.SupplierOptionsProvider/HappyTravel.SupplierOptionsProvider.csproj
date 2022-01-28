@@ -10,8 +10,8 @@
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Sunpu client</Description>
     <PackageReleaseNotes>Change from configuration provider to service</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/happy-travel/sunpu-client</PackageProjectUrl>
-    <RepositoryURL>https://github.com/happy-travel/sunpu-client</RepositoryURL>
+    <PackageProjectUrl>https://github.com/happy-travel/supplier-options-provider</PackageProjectUrl>
+    <RepositoryURL>https://github.com/happy-travel/supplier-options-provider</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Version>0.1.0</Version>
     <OutputType>Library</OutputType>
