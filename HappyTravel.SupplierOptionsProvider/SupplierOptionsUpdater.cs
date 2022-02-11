@@ -53,7 +53,7 @@ namespace HappyTravel.SupplierOptionsProvider
             response.EnsureSuccessStatusCode();
 
             var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-            var suppliers = await JsonSerializer.DeserializeAsync<List<Supplier>>(stream, new JsonSerializerOptions
+            var suppliers = await JsonSerializer.DeserializeAsync<List<SlimSupplier>>(stream, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             }, cancellationToken);

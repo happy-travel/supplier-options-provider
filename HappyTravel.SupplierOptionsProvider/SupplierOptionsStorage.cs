@@ -14,7 +14,7 @@ namespace HappyTravel.SupplierOptionsProvider
         }
         
         
-        public List<Supplier> GetAll()
+        public List<SlimSupplier> GetAll()
         {
             if (SpinWait.SpinUntil(() => _isFilled, _configuration.StorageTimeout))
                 return _suppliers;
@@ -23,7 +23,7 @@ namespace HappyTravel.SupplierOptionsProvider
         }
 
 
-        public Supplier GetById(int id)
+        public SlimSupplier GetById(int id)
         {
             if (SpinWait.SpinUntil(() => _isFilled, _configuration.StorageTimeout))
                 return _suppliers.Single(s => s.Id == id);
@@ -32,7 +32,7 @@ namespace HappyTravel.SupplierOptionsProvider
         }
 
         
-        public void Set(List<Supplier> suppliers)
+        public void Set(List<SlimSupplier> suppliers)
         {
             _suppliers = suppliers;
             _isFilled = true;
@@ -41,7 +41,7 @@ namespace HappyTravel.SupplierOptionsProvider
 
         private readonly Configuration _configuration;
         
-        private volatile List<Supplier> _suppliers = new();
+        private volatile List<SlimSupplier> _suppliers = new();
         private bool _isFilled;
     }
 }

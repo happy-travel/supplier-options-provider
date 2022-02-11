@@ -4,16 +4,16 @@
     <Nullable>enable</Nullable>
     <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <Copyright>HappyTravel.com</Copyright>
-    <Authors>Denis Nikolaev, Konstantin Yefremov</Authors>
+    <Authors>Denis Nikolaev, Konstantin Yefremov, Vadim Mingazhev</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Sunpu client</Description>
-    <PackageReleaseNotes>Added gRPC endpoint</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated supplier model</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/supplier-options-provider</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/supplier-options-provider</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
   </PropertyGroup>
