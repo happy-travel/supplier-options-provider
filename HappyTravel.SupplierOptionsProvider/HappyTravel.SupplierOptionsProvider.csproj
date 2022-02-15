@@ -9,11 +9,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Sunpu client</Description>
-    <PackageReleaseNotes>Updated supplier model</PackageReleaseNotes>
+    <PackageReleaseNotes>Added custom headers</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/supplier-options-provider</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/supplier-options-provider</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.2.1</Version>
+    <Version>0.3.0</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
   </PropertyGroup>
