@@ -2,21 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using HappyTravel.SupplierOptionsClient.Models;
 using Microsoft.Extensions.Options;
 
 namespace HappyTravel.SupplierOptionsProvider
 {
     public class SupplierOptionsStorage : ISupplierOptionsStorage
     {
-        public SupplierOptionsStorage(IOptions<Configuration> configuration)
+        public SupplierOptionsStorage(IOptions<SupplierOptionsProviderConfiguration> configuration)
         {
-            _configuration = configuration.Value;
+            _supplierOptionsProviderConfiguration = configuration.Value;
         }
         
         
         public List<SlimSupplier> GetAll()
         {
-            if (SpinWait.SpinUntil(() => _isFilled, _configuration.StorageTimeout))
+            if (SpinWait.SpinUntil(() => _isFilled, _supplierOptionsProviderConfiguration.StorageTimeout))
                 return _suppliers;
 
             throw new Exception("Supplier storage is not filled");
@@ -25,7 +26,7 @@ namespace HappyTravel.SupplierOptionsProvider
 
         public SlimSupplier GetById(int id)
         {
-            if (SpinWait.SpinUntil(() => _isFilled, _configuration.StorageTimeout))
+            if (SpinWait.SpinUntil(() => _isFilled, _supplierOptionsProviderConfiguration.StorageTimeout))
                 return _suppliers.Single(s => s.Id == id);
 
             throw new Exception("Supplier storage is not filled");
@@ -39,7 +40,7 @@ namespace HappyTravel.SupplierOptionsProvider
         }
 
 
-        private readonly Configuration _configuration;
+        private readonly SupplierOptionsProviderConfiguration _supplierOptionsProviderConfiguration;
         
         private volatile List<SlimSupplier> _suppliers = new();
         private bool _isFilled;
