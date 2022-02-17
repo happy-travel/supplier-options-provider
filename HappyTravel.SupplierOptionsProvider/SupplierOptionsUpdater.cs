@@ -13,10 +13,9 @@ namespace HappyTravel.SupplierOptionsProvider
 {
     internal class SupplierOptionsUpdater : BackgroundService
     {
-        public SupplierOptionsUpdater(ISupplierOptionsClient supplierOptionsClient, IServiceScopeFactory scopeFactory, 
-            IOptions<SupplierOptionsProviderConfiguration> configuration, ISupplierOptionsStorage storage)
+        public SupplierOptionsUpdater(IServiceScopeFactory scopeFactory, ISupplierOptionsStorage storage,
+            IOptions<SupplierOptionsProviderConfiguration> configuration)
         {
-            _supplierOptionsClient = supplierOptionsClient;
             _scopeFactory = scopeFactory;
             _supplierOptionsProviderConfiguration = configuration.Value;
             _storage = storage;
@@ -29,10 +28,11 @@ namespace HappyTravel.SupplierOptionsProvider
             {
                 using var scope = _scopeFactory.CreateScope();
                 var logger = scope.ServiceProvider.GetRequiredService<ILogger<SupplierOptionsUpdater>>();
-                
+                var client = scope.ServiceProvider.GetRequiredService<ISupplierOptionsClient>();
+
                 try
                 {
-                    await UpdateStorage(logger);
+                    await UpdateStorage(client, logger);
                 }
                 catch (Exception ex)
                 {
@@ -44,9 +44,9 @@ namespace HappyTravel.SupplierOptionsProvider
         }
 
 
-        private async Task UpdateStorage(ILogger logger)
+        private async Task UpdateStorage(ISupplierOptionsClient client, ILogger logger)
         {
-            var (_, isFailure, suppliers, error) = await _supplierOptionsClient.GetAll();
+            var (_, isFailure, suppliers, error) = await client.GetAll();
             if (isFailure)
                 throw new Exception($"Supplier options storage update failed: {error}");
             
@@ -54,7 +54,6 @@ namespace HappyTravel.SupplierOptionsProvider
             logger.LogSuppliersStorageRefreshed(suppliers.Count);
         }
 
-        private readonly ISupplierOptionsClient _supplierOptionsClient;
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly ISupplierOptionsStorage _storage;
         private readonly SupplierOptionsProviderConfiguration _supplierOptionsProviderConfiguration;
