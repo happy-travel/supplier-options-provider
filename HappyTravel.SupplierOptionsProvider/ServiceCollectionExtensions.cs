@@ -14,11 +14,11 @@ namespace HappyTravel.SupplierOptionsProvider
 
             var supplierOptionsConfig = new SupplierOptionsProviderConfiguration();
             configurationAction(supplierOptionsConfig);
-            if (Uri.IsWellFormedUriString(supplierOptionsConfig.Endpoint, UriKind.Absolute))
-                throw new ArgumentException($"Invalid supplier client endpoint {supplierOptionsConfig.Endpoint}");
+            if (string.IsNullOrWhiteSpace(supplierOptionsConfig.Endpoint))
+                throw new ArgumentException($"Supplier client endpoint cannot be empty");
             
             if (string.IsNullOrWhiteSpace(supplierOptionsConfig.IdentityClientName))
-                throw new ArgumentException($"Identity client name cannot be null");
+                throw new ArgumentException($"Identity client name cannot be empty");
 
             if (supplierOptionsConfig.StorageTimeout == default)
                 throw new ArgumentException("Storage timeout is not set");
