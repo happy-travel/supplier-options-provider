@@ -11,9 +11,9 @@ namespace HappyTravel.SupplierOptionsProvider.Logger
                 new EventId(6001, "SuppliersStorageRefreshed"),
                 "Suppliers storage was refreshed with {Count} suppliers");
             
-            SupplierStorageUpdateFailed = LoggerMessage.Define(LogLevel.Error,
+            SupplierStorageUpdateFailed = LoggerMessage.Define<string>(LogLevel.Error,
                 new EventId(6002, "SupplierStorageUpdateFailed"),
-                "Supplier storage update failed");
+                "Supplier storage update failed with error {Error}");
             
         }
     
@@ -21,13 +21,13 @@ namespace HappyTravel.SupplierOptionsProvider.Logger
          public static void LogSuppliersStorageRefreshed(this ILogger logger, int Count, Exception exception = null)
             => SuppliersStorageRefreshed(logger, Count, exception);
                 
-         public static void LogSupplierStorageUpdateFailed(this ILogger logger, Exception exception = null)
-            => SupplierStorageUpdateFailed(logger, exception);
+         public static void LogSupplierStorageUpdateFailed(this ILogger logger, string Error, Exception exception = null)
+            => SupplierStorageUpdateFailed(logger, Error, exception);
     
     
         
         private static readonly Action<ILogger, int, Exception> SuppliersStorageRefreshed;
         
-        private static readonly Action<ILogger, Exception> SupplierStorageUpdateFailed;
+        private static readonly Action<ILogger, string, Exception> SupplierStorageUpdateFailed;
     }
 }

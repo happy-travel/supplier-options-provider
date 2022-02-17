@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
+using HappyTravel.SupplierOptionsClient;
 using HappyTravel.SupplierOptionsProvider.Logger;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,12 +13,12 @@ namespace HappyTravel.SupplierOptionsProvider
 {
     internal class SupplierOptionsUpdater : BackgroundService
     {
-        public SupplierOptionsUpdater(IHttpClientFactory httpClientFactory, IServiceScopeFactory scopeFactory, 
-            IOptions<Configuration> configuration, ISupplierOptionsStorage storage)
+        public SupplierOptionsUpdater(ISupplierOptionsClient supplierOptionsClient, IServiceScopeFactory scopeFactory, 
+            IOptions<SupplierOptionsProviderConfiguration> configuration, ISupplierOptionsStorage storage)
         {
-            _httpClientFactory = httpClientFactory;
+            _supplierOptionsClient = supplierOptionsClient;
             _scopeFactory = scopeFactory;
-            _configuration = configuration.Value;
+            _supplierOptionsProviderConfiguration = configuration.Value;
             _storage = storage;
         }
         
@@ -33,41 +32,31 @@ namespace HappyTravel.SupplierOptionsProvider
                 
                 try
                 {
-                    await UpdateStorage(logger, stoppingToken);
+                    await UpdateStorage(logger);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    logger.LogSupplierStorageUpdateFailed();
+                    logger.LogSupplierStorageUpdateFailed(ex.Message, ex);
                 }
 
-                await Task.Delay(_configuration.UpdaterInterval, stoppingToken);
+                await Task.Delay(_supplierOptionsProviderConfiguration.UpdaterInterval, stoppingToken);
             }
         }
 
 
-        private async Task UpdateStorage(ILogger logger, CancellationToken cancellationToken)
+        private async Task UpdateStorage(ILogger logger)
         {
-            var client = _httpClientFactory.CreateClient(_configuration.HttpClientName);
-            using var response = await client.GetAsync(_configuration.Endpoint, cancellationToken);
-            
-            response.EnsureSuccessStatusCode();
-
-            var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-            var suppliers = await JsonSerializer.DeserializeAsync<List<SlimSupplier>>(stream, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            }, cancellationToken);
-
-            if (suppliers is null)
-                throw new JsonException("Supplier list is not deserialized properly");
+            var (_, isFailure, suppliers, error) = await _supplierOptionsClient.GetAll();
+            if (isFailure)
+                throw new Exception($"Supplier options storage update failed: {error}");
             
             _storage.Set(suppliers);
             logger.LogSuppliersStorageRefreshed(suppliers.Count);
         }
 
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ISupplierOptionsClient _supplierOptionsClient;
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly ISupplierOptionsStorage _storage;
-        private readonly Configuration _configuration;
+        private readonly SupplierOptionsProviderConfiguration _supplierOptionsProviderConfiguration;
     }
 }
