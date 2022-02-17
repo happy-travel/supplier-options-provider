@@ -8,7 +8,7 @@ public static partial class LoggerExtensions
     [LoggerMessage(6001, LogLevel.Debug, "Suppliers storage was refreshed with {Count} suppliers")]
     static partial void SuppliersStorageRefreshed(ILogger logger, int Count);
     
-    [LoggerMessage(0, LogLevel.Error, "Supplier storage update failed with error {Error}")]
+    [LoggerMessage(6002, LogLevel.Error, "Supplier storage update failed with error {Error}")]
     static partial void SupplierStorageUpdateFailed(ILogger logger, System.Exception exception, string Error);
     
     
