@@ -36,7 +36,7 @@ namespace HappyTravel.SupplierOptionsProvider
                 }
                 catch (Exception ex)
                 {
-                    logger.LogSupplierStorageUpdateFailed(ex.Message, ex);
+                    logger.LogSupplierStorageUpdateFailed(ex, ex.Message);
                 }
 
                 await Task.Delay(_supplierOptionsProviderConfiguration.UpdaterInterval, stoppingToken);

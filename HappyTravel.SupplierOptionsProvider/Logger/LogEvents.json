@@ -6,7 +6,8 @@
         "template": "Suppliers storage was refreshed with {Count} suppliers",
         "argumentTypes": [
             "int"
-        ]
+        ],
+        "hasException": false
     },
     {
         "Id": 6002,
@@ -15,6 +16,7 @@
         "template": "Supplier storage update failed with error {Error}",
         "argumentTypes": [
             "string"
-        ]
+        ],
+        "hasException": true
     }
 ]
