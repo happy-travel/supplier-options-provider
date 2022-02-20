@@ -8,11 +8,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Sunpu client</Description>
-    <PackageReleaseNotes>Fixed scope inconsistency error</PackageReleaseNotes>
+    <PackageReleaseNotes>Added getting by code method</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/supplier-options-provider</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/supplier-options-provider</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.4.1</Version>
+    <Version>0.5.0</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
     <TargetFramework>net6.0</TargetFramework>
