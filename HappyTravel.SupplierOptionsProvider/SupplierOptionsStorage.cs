@@ -33,6 +33,15 @@ namespace HappyTravel.SupplierOptionsProvider
         }
 
         
+        public SlimSupplier GetByCode(string code)
+        {
+            if (SpinWait.SpinUntil(() => _isFilled, _supplierOptionsProviderConfiguration.StorageTimeout))
+                return _suppliers.Single(s => s.Code == code);
+
+            throw new Exception("Supplier storage is not filled");
+        }
+        
+        
         public void Set(List<SlimSupplier> suppliers)
         {
             _suppliers = suppliers;
