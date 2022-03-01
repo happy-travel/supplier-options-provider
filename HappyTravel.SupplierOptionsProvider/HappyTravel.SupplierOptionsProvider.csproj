@@ -8,11 +8,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Supplier options provider</Description>
-    <PackageReleaseNotes>Updated supplier options client version</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated dependencies</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/supplier-options-provider</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/supplier-options-provider</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.6.0</Version>
+    <Version>0.7.0</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
     <TargetFramework>net6.0</TargetFramework>
