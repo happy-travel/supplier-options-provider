@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using CSharpFunctionalExtensions;
 using HappyTravel.SupplierOptionsClient.Models;
 using Microsoft.Extensions.Options;
 
@@ -15,21 +15,19 @@ namespace HappyTravel.SupplierOptionsProvider
         }
         
         
-        public List<SlimSupplier> GetAll()
+        public Result<List<SlimSupplier>> GetAll() 
+            => SpinWait.SpinUntil(() => _isFilled, _supplierOptionsProviderConfiguration.StorageTimeout) 
+                ? _suppliers 
+                : Result.Failure<List<SlimSupplier>>("Supplier storage is not filled");
+
+
+        public Result<SlimSupplier> Get(string code)
         {
-            if (SpinWait.SpinUntil(() => _isFilled, _supplierOptionsProviderConfiguration.StorageTimeout))
-                return _suppliers;
+            if (!SpinWait.SpinUntil(() => _isFilled, _supplierOptionsProviderConfiguration.StorageTimeout))
+                return Result.Failure<SlimSupplier>("Supplier storage is not filled");
 
-            throw new Exception("Supplier storage is not filled");
-        }
-
-        
-        public SlimSupplier Get(string code)
-        {
-            if (SpinWait.SpinUntil(() => _isFilled, _supplierOptionsProviderConfiguration.StorageTimeout))
-                return _suppliers.Single(s => s.Code == code);
-
-            throw new Exception("Supplier storage is not filled");
+            var supplier = _suppliers.SingleOrDefault(s => s.Code == code);
+            return supplier ?? Result.Failure<SlimSupplier>("Supplier not found");
         }
         
         
