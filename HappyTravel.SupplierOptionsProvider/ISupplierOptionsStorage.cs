@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using CSharpFunctionalExtensions;
 using HappyTravel.SupplierOptionsClient.Models;
 
 namespace HappyTravel.SupplierOptionsProvider
 {
     public interface ISupplierOptionsStorage
     {
-        List<SlimSupplier> GetAll();
+        Result<List<SlimSupplier>> GetAll();
         void Set(List<SlimSupplier> suppliers);
-        SlimSupplier Get(string code);
+        Result<SlimSupplier> Get(string code);
     }
 }
