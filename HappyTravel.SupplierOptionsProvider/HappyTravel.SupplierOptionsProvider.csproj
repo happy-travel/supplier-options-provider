@@ -8,11 +8,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Supplier options provider</Description>
-    <PackageReleaseNotes>Removed exceptions</PackageReleaseNotes>
+    <PackageReleaseNotes>Add supplier priorities</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/supplier-options-provider</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/supplier-options-provider</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.8.1</Version>
+    <Version>1.0.0</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
     <TargetFramework>net6.0</TargetFramework>
@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <PackageReference Include="CSharpFunctionalExtensions" Version="2.29.0" />
-    <PackageReference Include="HappyTravel.SupplierOptionsClient" Version="0.5.2" />
+    <PackageReference Include="HappyTravel.SupplierOptionsClient" Version="1.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />

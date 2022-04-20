@@ -14,7 +14,7 @@ namespace HappyTravel.SupplierOptionsProvider
 
             var supplierOptionsConfig = new SupplierOptionsProviderConfiguration();
             configurationAction(supplierOptionsConfig);
-            if (string.IsNullOrWhiteSpace(supplierOptionsConfig.Endpoint))
+            if (string.IsNullOrWhiteSpace(supplierOptionsConfig.BaseEndpoint))
                 throw new ArgumentException($"Supplier client endpoint cannot be empty");
             
             if (string.IsNullOrWhiteSpace(supplierOptionsConfig.IdentityClientName))
@@ -29,7 +29,7 @@ namespace HappyTravel.SupplierOptionsProvider
             services.AddSingleton<ISupplierOptionsStorage, SupplierOptionsStorage>();
             services.AddSupplierOptionsClient(settings =>
             {
-                settings.Endpoint = supplierOptionsConfig.Endpoint;
+                settings.BaseEndpoint = supplierOptionsConfig.BaseEndpoint;
             }, supplierOptionsConfig.IdentityClientName);
             
             return services;
