@@ -8,11 +8,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <Description>Supplier options provider</Description>
-    <PackageReleaseNotes>Add supplier priorities</PackageReleaseNotes>
+    <PackageReleaseNotes>Bump version of supplier options client</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/happy-travel/supplier-options-provider</PackageProjectUrl>
     <RepositoryURL>https://github.com/happy-travel/supplier-options-provider</RepositoryURL>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.3</Version>
+    <Version>1.1</Version>
     <OutputType>Library</OutputType>
     <IsPackable>True</IsPackable>
     <TargetFramework>net6.0</TargetFramework>
