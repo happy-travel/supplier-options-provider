@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSharpFunctionalExtensions" Version="2.29.2" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.29.3" />
     <PackageReference Include="HappyTravel.SupplierOptionsClient" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
